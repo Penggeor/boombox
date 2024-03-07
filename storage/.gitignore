@@ -1,3 +1,7 @@
+# Code editor
+.vscode
+.idea
+
 *-debug.log
 *-error.log
 /.nyc_output

@@ -1,4 +1,11 @@
-# 创建一个 TypeScript/TS 的 NPM/npm 包
+# NPM Template With TypeScript/TS
+
+## 介绍
+
+这是一个用于创建一个包含 TypeScript/TS 的 NPM/npm 包的模板。
+
+
+## 如何创建一个 TypeScript/TS 的 NPM/npm 包
 
 0. 在 GitHub 上创建一个仓库，并 `clone` 到本地
 
@@ -172,10 +179,3 @@ npm version patch
 ```shell
 npm publish
 ```
-
-https://juejin.cn/post/7160595423395053598
-yalc
-
-
-## Reference
-[1] [Step by step: Building and publishing an NPM Typescript package.](https://itnext.io/step-by-step-building-and-publishing-an-npm-typescript-package-44fe7164964c)
