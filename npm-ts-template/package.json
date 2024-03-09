@@ -30,7 +30,7 @@
   "bugs": {
     "url": "https://github.com/Penggeor/boombox/issues"
   },
-  "homepage": "https://github.com/Penggeor/boombox#readme",
+  "homepage": "https://github.com/Penggeor/boombox/tree/main/npm-ts-template",
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "jest": "^29.7.0",

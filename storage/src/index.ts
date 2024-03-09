@@ -1,45 +1,67 @@
-if(!global.localStorage) {
-  throw new Error('Local storage is not supported')
+if (!globalThis.localStorage) {
+  throw new Error('Local storage is not supported');
 }
-if(!global.sessionStorage) {
-  throw new Error('Session storage is not supported')
+if (!globalThis.sessionStorage) {
+  throw new Error('Session storage is not supported');
 }
 
-class ExtendedStorage extends Storage {
-  constructor(storage: Storage,
+type IExtendedStorage = Omit<Storage, 'setItem' | 'getItem'> & {
+  setItem(key: string, value: unknown): void;
+  getItem(key: string): unknown;
+  serialize: (value: unknown) => string;
+  deserialize: (value: string) => unknown;
+};
+
+class ExtendedStorage implements IExtendedStorage {
+  private storage: Storage;
+  serialize: (value: unknown) => string;
+  deserialize: (value: string) => unknown;
+
+  get length() {
+    return this.storage.length;
+  }
+  clear: Storage['clear'];
+  removeItem: Storage['removeItem'];
+  key: Storage['key'];
+
+  constructor(
+    storage: Storage,
     serialize = JSON.stringify,
-    deserialize = JSON.parse
-    ) {
-    super()
-    this.storage = storage
-    this.serialize = serialize
-    this.deserialize = deserialize
+    deserialize = JSON.parse,
+  ) {
+    this.storage = storage;
+    this.serialize = serialize;
+    this.deserialize = deserialize;
+
+    this.clear = this.storage.clear.bind(this.storage);
+    this.removeItem = this.storage.removeItem.bind(this.storage);
+    this.key = this.storage.key.bind(this.storage);
   }
 
-  public setItem(key: string, value: any) {
-    this.storage.setItem(key, this.serialize(value))
+  setItem(key: string, value: unknown) {
+    this.storage.setItem(key, this.serialize(value));
   }
 
-  public getItem(key: string) {
-    const value = this.storage.getItem(key)
-    if(value) {
-      return this.deserialize(value)
+  getItem(key: string): unknown {
+    const value = this.storage.getItem(key);
+    if (value) {
+      return this.deserialize(value);
     }
-    return value
+    return value;
   }
 }
 
 export class LocalStorage extends ExtendedStorage {
   constructor() {
-    super(global.localStorage)
+    super(globalThis.localStorage);
   }
 }
 
 export class SessionStorage extends ExtendedStorage {
   constructor() {
-    super(global.sessionStorage)
+    super(globalThis.sessionStorage);
   }
 }
 
-export const localStorage = new LocalStorage()
-export const sessionStorage = new SessionStorage()
+export const localStorage = new LocalStorage();
+export const sessionStorage = new SessionStorage();
