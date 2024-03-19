@@ -36,3 +36,4 @@ import { safeDump, safeLoad } from 'js-yaml';
 localStorage.serialize = safeDump;
 localStorage.deserialize = safeLoad;
 ```
+
