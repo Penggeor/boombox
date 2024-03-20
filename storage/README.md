@@ -28,6 +28,7 @@ localStorage.setItem('statistic', { count: 1 })
 
 
 可以设置自定义的 `serialize` 和 `deserialize` 方法。
+
 ```typescript
 // 比如 YAML 序列化
 import { localStorage } from '@boombox/storage';
@@ -37,3 +38,6 @@ localStorage.serialize = safeDump;
 localStorage.deserialize = safeLoad;
 ```
 
+# 案例
+
+- **MulSearch**: https://github.com/Penggeor/mul-search

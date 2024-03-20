@@ -1,6 +1,6 @@
 {
   "name": "@boombox/storage",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A simple localStorage and sessionStorage wrapper to support your set/get object or array data directly.",
   "type": "module",
   "main": "lib/index.js",
@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Penggeor/boombox.git"
+    "url": "https://github.com/Penggeor/boombox/tree/main/storage"
   },
   "keywords": [
     "localStorage",

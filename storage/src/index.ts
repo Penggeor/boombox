@@ -1,8 +1,27 @@
-if (!globalThis.localStorage) {
-  throw new Error('Local storage is not supported');
+let _localStorage = globalThis?.localStorage;
+let _sessionStorage = globalThis?.sessionStorage;
+
+if (!_localStorage) {
+  console.error('localStorage is not supported');
+  _localStorage = {
+    length: 0,
+    setItem: () => {},
+    getItem: () => null,
+    removeItem: () => void 0,
+    clear: () => {},
+    key: () => null,
+  };
 }
-if (!globalThis.sessionStorage) {
-  throw new Error('Session storage is not supported');
+if (!_sessionStorage) {
+  console.error('sessionStorage is not supported');
+  _sessionStorage = {
+    length: 0,
+    setItem: () => {},
+    getItem: () => null,
+    removeItem: () => void 0,
+    clear: () => {},
+    key: () => null,
+  };
 }
 
 type IExtendedStorage = Omit<Storage, 'setItem' | 'getItem'> & {
@@ -53,13 +72,13 @@ class ExtendedStorage implements IExtendedStorage {
 
 export class LocalStorage extends ExtendedStorage {
   constructor() {
-    super(globalThis.localStorage);
+    super(_localStorage);
   }
 }
 
 export class SessionStorage extends ExtendedStorage {
   constructor() {
-    super(globalThis.sessionStorage);
+    super(_sessionStorage);
   }
 }
 
